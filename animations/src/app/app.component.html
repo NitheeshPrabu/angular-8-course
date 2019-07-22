@@ -2,10 +2,14 @@
   <div class="row">
     <div class="col-xs-12">
       <h1>Animations</h1>
-      <button class="btn btn-primary">Animate!</button>
-      <button class="btn btn-primary">Shrink!</button>
+      <button class="btn btn-primary" (click)="onAnimate()">Animate!</button>
+      <button class="btn btn-primary" (click)="onShrink()">Shrink!</button>
       <hr>
-      <div></div>
+      <div [@divState]="state" style="width: 100px; height: 100px;"
+        (@divState.start)="onAnimationStart($event)"
+        (@divState.done)="onAnimationEnd($event)"></div>
+      <br>
+      <div [@wildState]="wildState" style="width: 100px; height: 100px;"></div>
     </div>
   </div>
   <hr>
@@ -15,10 +19,7 @@
       <button class="btn btn-primary" (click)="onAdd(input.value)">Add Item!</button>
       <hr>
       <ul class="list-group">
-        <li
-          class="list-group-item"
-          (click)="onDelete(item)"
-          *ngFor="let item of list">
+        <li [@list1] class="list-group-item" (click)="onDelete(i)" *ngFor="let item of list; let i = index;">
           {{ item }}
         </li>
       </ul>
@@ -28,12 +29,9 @@
   <div class="row">
     <div class="col-xs-12">
       <ul class="list-group">
-        <li
-          class="list-group-item"
-          (click)="onDelete(item)"
-          *ngFor="let item of list">
+        <li [@list2] class="list-group-item" (click)="onDelete(item)" *ngFor="let item of list">
           {{ item }}
         </li>
       </ul>
     </div>
-</div>
+  </div>
